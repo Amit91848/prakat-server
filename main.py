@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from router import crawl_manager, search, auth_route, btc_address
+from router import crawl_manager, search, auth_route, btc_address, report_route
 from config.config import initiate_database
 
 app = FastAPI()
@@ -26,4 +26,5 @@ app.add_middleware(
 app.include_router(router=search.router, prefix='/search')
 app.include_router(router=crawl_manager.router, prefix='/crawl_manager')
 app.include_router(router=btc_address.router, prefix="/btc_address")
+app.include_router(router=report_route.router, prefix="/report")
 app.include_router(router=auth_route.router, prefix="")
