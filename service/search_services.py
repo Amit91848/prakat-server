@@ -58,7 +58,7 @@ def rank_documents(query: str, vectorizer: TfidfVectorizer, vector_tfidf: TfidfT
             tags_to_check = tags.split(',')
 
             # Check if any tag in tags_to_check is present in tags_list
-            if any(tag in tags_list for tag in tags_to_check):
+            if all(tag in tags_list for tag in tags_to_check):
                 result = SearchResult(title=df['title'][i], url=df['url'][i], score=ranking[i], id=str(
                     df['_id'][i]), tags=tags_list)
                 results.append(result)
