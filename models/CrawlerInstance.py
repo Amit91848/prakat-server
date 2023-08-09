@@ -2,9 +2,9 @@ from beanie import Document
 
 class crawlerinstance(Document):
     url: str
-    limit: int | None
+    limit: int
     userId: str
-    same_domain: bool | None
+    same_domain: bool
     status: int
 
     class Config:

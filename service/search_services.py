@@ -34,7 +34,7 @@ def load_and_vectorize_data(collection):
     return df, vectorizer, vector_tfidf
 
 
-def rank_documents(query: str, vectorizer: TfidfVectorizer, vector_tfidf: TfidfTransformer, df, page: int, pageCount: int, tags: str | None) -> List[SearchResult]:
+def rank_documents(query: str, vectorizer: TfidfVectorizer, vector_tfidf: TfidfTransformer, df, page: int, pageCount: int, tags: str) -> List[SearchResult]:
     query_vec = vectorizer.transform([query])
     cosine_similarities = linear_kernel(query_vec, vector_tfidf).flatten()
     ranking = cosine_similarities.argsort()[::-1]

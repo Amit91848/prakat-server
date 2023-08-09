@@ -44,7 +44,6 @@ pipeline = [
 
 @router.get('/')
 async def getAllBtc():
-    print('adwait gandu')
     query = {"ents.label": "BTC Wallet Address"}
     projection = {"ents.entity": 1, "_id": 0, "ents.label": 1}
 

@@ -9,4 +9,4 @@ class crawled_sites(Document):
     ner_done: bool
     tags: List[str]
     report_generated: bool
-    reportId: str | None
+    reportId: str 

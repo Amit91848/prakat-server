@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from router import crawl_manager, search, auth_route, btc_address, report_route
+from router import crawl_manager, search, auth_route, btc_address, report_route, pie_chart, tor_stats
 from config.config import initiate_database
 
 app = FastAPI()
@@ -27,4 +27,6 @@ app.include_router(router=search.router, prefix='/search')
 app.include_router(router=crawl_manager.router, prefix='/crawl_manager')
 app.include_router(router=btc_address.router, prefix="/btc_address")
 app.include_router(router=report_route.router, prefix="/report")
+app.include_router(router=pie_chart.router, prefix="/pie_chart")
+app.include_router(router=tor_stats.router,prefix="/tor_stats")
 app.include_router(router=auth_route.router, prefix="")
