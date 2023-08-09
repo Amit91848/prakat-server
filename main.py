@@ -3,6 +3,11 @@ from router import crawl_manager, search, auth_route, btc_address, report_route,
 from router import crawl_manager, search, auth_route, btc_address, report_route, pie_chart, tor_stats, mail_route
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+<<<<<<< Updated upstream
+=======
+from router import crawl_manager, search, auth_route, btc_address, report_route, data_breach
+from config.config import initiate_database
+>>>>>>> Stashed changes
 
 app = FastAPI()
 
@@ -28,8 +33,11 @@ app.include_router(router=search.router, prefix='/search')
 app.include_router(router=crawl_manager.router, prefix='/crawl_manager')
 app.include_router(router=btc_address.router, prefix="/btc_address")
 app.include_router(router=report_route.router, prefix="/report")
+<<<<<<< Updated upstream
 app.include_router(router=pie_chart.router, prefix="/pie_chart")
 app.include_router(router=tor_stats.router, prefix="/tor_stats")
 app.include_router(router=mail_route.router, prefix="/mail")
+=======
+>>>>>>> Stashed changes
 app.include_router(router=data_breach.router, prefix="/data_breach")
 app.include_router(router=auth_route.router, prefix="")
