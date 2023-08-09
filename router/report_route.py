@@ -19,20 +19,20 @@ async def getAllReports():
     for report in reports:
         url_id = report['url_id']
         url_data = crawled_sites.find_one({"_id": ObjectId(url_id)})
-        print(url_id)
-        print(url_data)
 
         if url_data:
             combined_entry = {
                 '_id': str(report['_id']),
                 'url_id': str(url_data['_id']),
-                'report': report['report'],
+                # 'report': report['report'] if not None else "",
                 'user_id': report['user_id'],
                 'url': url_data['url'],
                 'title': url_data['title'],
-                'status': url_data['report_generated'],
+                'status': report['report_generated'],
                 'name': report['name']
             }
+            if (report['report_generated'] == 2):
+                combined_entry['report'] = report['report']
 
             combined_data.append(combined_entry)
     # print(reports)

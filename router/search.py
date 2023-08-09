@@ -17,6 +17,8 @@ client = MongoClient(
 db = client['prakat23']
 crawled_sites = db['crawled_sites']
 
+report_collection = db['report_collection']
+
 
 # collection = list(crawled_sites.find())
 
@@ -28,7 +30,7 @@ df_pickle = "df.pickle"
 vectorizer_pickle = "vectorizer.pickle"
 vector_tfidf_pickle = "vector_tfidf.pickle"
 
-# # Open the file in binary write mode and pickle the data
+# Open the file in binary write mode and pickle the data
 # with open(df_pickle, 'wb') as file:
 #     pickle.dump(df, file)
 # with open(vectorizer_pickle, 'wb') as file:

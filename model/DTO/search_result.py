@@ -8,3 +8,4 @@ class SearchResult(BaseModel):
     url: str
     score: int
     tags: List[str]
+    report_generated: int

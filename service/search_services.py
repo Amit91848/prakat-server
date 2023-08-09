@@ -4,7 +4,16 @@ from typing import List
 from model.DTO.search_result import SearchResult
 from sklearn.metrics.pairwise import linear_kernel
 import json
+from pymongo import MongoClient
+from bson import ObjectId
 # from models.CrawledSites import crawled_sites
+
+client = MongoClient(
+    'mongodb+srv://yash23malode:9dtb8MGh5aCZ5KHN@cluster.u0gqrzk.mongodb.net/')
+db = client['prakat23']
+crawled_sites = db['crawled_sites']
+
+report_collection = db['report_collection']
 
 
 def get_lines(file_obj):
@@ -59,16 +68,31 @@ def rank_documents(query: str, vectorizer: TfidfVectorizer, vector_tfidf: TfidfT
 
             # Check if any tag in tags_to_check is present in tags_list
             if all(tag in tags_list for tag in tags_to_check):
+                # print(list(report_collection.find_one({"url_id": df['_id'][i]})))
+
+                # print(list(report_collection.find_one(
+                #     {"url_id": str(df['_id'][i])})))
+
                 result = SearchResult(title=df['title'][i], url=df['url'][i], score=ranking[i], id=str(
-                    df['_id'][i]), tags=tags_list)
+                    df['_id'][i]), tags=tags_list, report_generated=df['report_generated'][i])
                 results.append(result)
             else:
                 end_index += 1
                 continue
         else:
             # No filter specified, include the document in the results
-            result = SearchResult(title=df['title'][i], url=df['url'][i], score=ranking[i], id=str(
-                df['_id'][i]), tags=tags_list)
+            doc = report_collection.find_one(
+                {"url_id": str(df['_id'][i])})
+            if doc is not None:
+                print(doc['name'])
+                # print(listdoc.get('report_generated'))
+                result = SearchResult(title=df['title'][i], url=df['url'][i], score=ranking[i], id=str(
+                    df['_id'][i]), tags=tags_list, report_generated=doc['report_generated'])
+            else:
+                print('doc not found')
+                result = SearchResult(title=df['title'][i], url=df['url'][i], score=ranking[i], id=str(
+                    df['_id'][i]), tags=tags_list, report_generated=0)
+
             results.append(result)
 
         # Increment end_index by one regardless of the filter being present or not
