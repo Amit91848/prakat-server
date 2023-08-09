@@ -40,40 +40,34 @@ pipeline = [
         }
     }
 ]
+btc_address_unique_pickle = "btc_address.pickle"
+
+
+@router.get('/search')
+async def searchForBtc(address: str = Query()):
+    address = address.strip()
+    with open(btc_address_unique_pickle, 'rb') as file:
+        unique_results = pickle.load(file)
+
+    for unique in unique_results:
+        if address == unique['btc_entity']:
+            return unique
+
+    return []
 
 
 @router.get('/')
 async def getAllBtc():
-    query = {"ents.label": "BTC Wallet Address"}
-    projection = {"ents.entity": 1, "_id": 0, "ents.label": 1}
-
-    # results = list(collection.find(query, projection))
-
-    # print(listresults)
-    # print(results[0])
-    # for doc in results:
-    #     for entity_obj in doc["ents"]:
-    #         if entity_obj["label"] == "BTC Wallet Address":
-    #             print(doc[])
-    #             print(entity_obj["entity"])
-
-    # results = list(collection.aggregate(pipeline))
-    # results = list(collection.aggregate(pipeline))
-    # unique_results = organize_by_unique_entities(results)
-
-    btc_address_unique_pickle = "btc_address.pickle"
 
     # # # Open the file in binary write mode and pickle the data
     # with open(btc_address_unique_pickle, 'wb') as file:
     #     pickle.dump(unique_results, file)
 
-    # if unique_results:
-    #     print(unique_results[0])
     with open(btc_address_unique_pickle, 'rb') as file:
         unique_results = pickle.load(file)
 
     # Return the unique results
-    return unique_results[0: 100]
+    return unique_results[1: 101]
 
 
 def organize_by_unique_entities(results):

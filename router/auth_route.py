@@ -28,11 +28,13 @@ async def admin_login(admin_credentials: Admin = Body()):
         raise HTTPException(
             status_code=403, detail='Incorrect Email or Password')
 
-    else:
-        admin_credentials.password = hash_helper.hash(
-            admin_credentials.password)
-        admin = await add_admin(admin_credentials)
-        return sign_jwt(str(admin.id))
+    raise HTTPException(
+        status_code=403, detail='Incorrect Email or Password')
+    # else:
+    #     admin_credentials.password = hash_helper.hash(
+    #         admin_credentials.password)
+    #     admin = await add_admin(admin_credentials)
+    #     return sign_jwt(str(admin.id))
 
     # raise HTTPException(
     #     status_code=403, detail='Incorrect Email or Password')
