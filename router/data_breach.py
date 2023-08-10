@@ -16,7 +16,7 @@ async def get_breach_status(email: str = Query()):
     #     "X-RapidAPI-Key": "b5b244a76fmshe0f84fb7bf6463fp18326ejsn09a683d93902",
     #     "X-RapidAPI-Host": "breachdirectory.p.rapidapi.com"
     # }
-    headers = {'X-RapidAPI-Key': '755f30fc3emsh8ed8af88f73ce9dp10059ajsn1b20dec94ffe',
+    headers = {'X-RapidAPI-Key': 'a79fcaa656msh53ad21d57e2d7a0p1ece2ajsnc51abe1a11bc',
                'X-RapidAPI-Host': 'breachdirectory.p.rapidapi.com'}
     response = requests.get(url, headers=headers, params=querystring)
     resp_json = json.loads(response.text)

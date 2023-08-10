@@ -67,7 +67,7 @@ async def getAllBtc():
         unique_results = pickle.load(file)
 
     # Return the unique results
-    return unique_results[1: 101]
+    return unique_results[0: 101]
 
 
 def organize_by_unique_entities(results):
